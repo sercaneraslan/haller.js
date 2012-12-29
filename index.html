@@ -13,6 +13,7 @@
   </head>
 
 <script>
+$(function() {
 function haller(isim, hal){
     var isim = isim.charAt(0).toUpperCase() + isim.slice(1),
         sesliHarfler = ["a", "ı", "o", "u", "e", "i", "ö", "ü"],
@@ -94,7 +95,6 @@ function haller(isim, hal){
     return isim + "'" + ek;
 }
 
-$(function() {
   var isim = $("#isim").val(),
       hal = $("#hal").val(),
       sonuc = haller(isim,hal);
