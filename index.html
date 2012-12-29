@@ -96,9 +96,11 @@ function haller(isim, hal){
 
 (function(){
   var isim = $("#isim").val(),
-      hal = $("#hal").val();
-      
-  haller(isim,hal);
+      hal = $("#hal").val(),
+      sonuc = haller(isim,hal);
+  
+  $("#sonuc").val(sonuc);
+    
 }();
   
 </script>
@@ -144,6 +146,7 @@ ve iyelik ekini</p>
   <input type="text" id="isim"/>
   <input type="text" id="hal"/>
   <input type="submit"/ value="Ek oluştur">
+  <div id="sonuc"></div>
 </p>
 
 <h3>Haller.js Kullanımı</h3>
