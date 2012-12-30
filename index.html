@@ -115,9 +115,9 @@ $(function() {
             hal = $("#hal").val(),
             ekler = ["e", "i", "de", "den", "iyelik"],
             eklerDogruMu = ekler.indexOf(isim);
-
+console.log(eklerDogruMu);
         if(isim !== '' && hal !== ''){
-            console.log(eklerDogruMu);
+            
             if(eklerDogruMu !== -1){
                 var haller = new Haller(isim, hal),
                     sonuc = haller.calistir();
