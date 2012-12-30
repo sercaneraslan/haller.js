@@ -42,8 +42,6 @@
             return this.ekler;
         },
         ekiOlustur: function(a,b,c,d,e,f){
-            this.harf = this.isminSonSesliHarfi(1);
-
             if(this.hal == "i" || this.hal == "iyelik"){
                 if(this.harf == 0 || this.harf == 1){
                     this.ek = this.ekler[a];
@@ -63,10 +61,11 @@
             return this.ek;
         },
         ekeKararVer: function(){
+            this.harf = this.isminSonSesliHarfi(1);
             this.ekiOlustur(0,1,2,3,0,1);
-
+            
             if(this.harf == -1){
-                (this.harf2 == -1) ? this.harf = this.isminSonSesliHarfi(3) : this.harf = this.isminSonSesliHarfi(2);
+                (this.isminSonSesliHarfi(2) == -1) ? this.harf = this.isminSonSesliHarfi(3) : this.harf = this.isminSonSesliHarfi(2);
                 this.ekiOlustur(4,5,6,7,2,3);
             }
             return this.ek;
