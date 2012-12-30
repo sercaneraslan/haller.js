@@ -114,17 +114,13 @@ $(function() {
         var isim = $("#isim").val(),
             hal = $("#hal").val();
 
-        if(isim == ''){
-            $("#sonuc").text("Lütfen İsim giriniz!");
+        if(isim !== '' && hal !== ''){
+            var haller = new Haller(isim, hal),
+                sonuc = haller.calistir();
+            $("#sonuc").text(sonuc);
+        }else {
+            $("#sonuc").text("Lütfen eksik bilgileri giriniz!");
         }
-        if(hal == ''){
-            $("#sonuc").text("Lütfen hal giriniz!");
-        }
-
-        var haller = new Haller(isim, hal),
-            sonuc = haller.calistir();
-
-        $("#sonuc").text(sonuc);
     });
 
 });
