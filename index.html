@@ -117,6 +117,7 @@ $(function() {
             eklerDogruMu = ekler.indexOf(isim);
 
         if(isim !== '' && hal !== ''){
+            console.log(eklerDogruMu);
             if(eklerDogruMu !== -1){
                 var haller = new Haller(isim, hal),
                     sonuc = haller.calistir();
