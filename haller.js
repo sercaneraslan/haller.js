@@ -7,16 +7,16 @@
 (function(){
 
     function Haller(isim, hal){
-        this.isim                = isim.charAt(0).toUpperCase() + isim.slice(1);
-        this.hal                 = hal;
-        this.sesliHarfler        = ["a", "ı", "o", "u", "e", "i", "ö", "ü"];
-        this.sertUnsuzler        = ["f", "s", "t", "k", "ç", "ş", "h", "p"];
-        this.sapkaliHarfIsimleri = ["Alp", "Şevval", "Kemal", "Bilal", "Nihal", "Hilal", "Meral", "Resul", "Celal", "Cemal"];
-        this.harf                = this.sesliHarfler.indexOf(this.isim.substr(this.isim.length-1,1));
-        this.harf2               = this.sesliHarfler.indexOf(this.isim.substr(this.isim.length-2,1));
-        this.harf3               = this.sesliHarfler.indexOf(this.isim.substr(this.isim.length-3,1));
-        this.sonuSertUnsuz       = this.sertUnsuzler.indexOf(this.isim.substr(this.isim.length-1,1));
-        this.sapkaliIsimler      = this.sapkaliHarfIsimleri.indexOf(this.isim);
+        this.isim                       = isim.charAt(0).toUpperCase() + isim.slice(1);
+        this.hal                        = hal;
+        this.sesliHarfler               = ["a", "ı", "o", "u", "e", "i", "ö", "ü"];
+        this.sertUnsuzler               = ["f", "s", "t", "k", "ç", "ş", "h", "p"];
+        this.sapkaliHarfIcerenIsimler   = ["Alp", "Şevval", "Kemal", "Bilal", "Nihal", "Hilal", "Meral", "Resul", "Celal", "Cemal"];
+        this.harf                       = this.sesliHarfler.indexOf(this.isim.substr(this.isim.length-1,1));
+        this.harf2                      = this.sesliHarfler.indexOf(this.isim.substr(this.isim.length-2,1));
+        this.harf3                      = this.sesliHarfler.indexOf(this.isim.substr(this.isim.length-3,1));
+        this.sonuSertUnsuz              = this.sertUnsuzler.indexOf(this.isim.substr(this.isim.length-1,1));
+        this.sapkaliIsimler             = this.sapkaliHarfIcerenIsimler.indexOf(this.isim);
         this.ekinSonHarfi;
         this.ekler;
         this.ek;
