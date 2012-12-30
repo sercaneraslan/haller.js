@@ -4,7 +4,6 @@
 * sercaneraslan.com
 *
 */
-
 (function(){
 
     function Haller(isim, hal){
@@ -26,19 +25,19 @@
     Haller.prototype = {
         eklereKararVer: function(){
             if(this.hal == "e"){
-              this.ekler = ["ya", "ye", "a", "e"];
+                this.ekler = ["ya", "ye", "a", "e"];
             }
             else if(this.hal == "de"){
-              this.ekler = ["da", "de", "da", "de"];
+                this.ekler = ["da", "de", "da", "de"];
             }
             else if(this.hal == "den"){
-              this.ekler = ["dan", "den", "dan", "den"];
+                this.ekler = ["dan", "den", "dan", "den"];
             }
             else if(this.hal == "i"){
-              this.ekler = ["yı", "yu", "yi", "yü", "ı", "u", "i", "ü"];
+                this.ekler = ["yı", "yu", "yi", "yü", "ı", "u", "i", "ü"];
             }
             else if(this.hal == "iyelik"){
-              this.ekler = ["nın", "nun", "nin", "nün", "ın", "un", "in", "ün"];
+                this.ekler = ["nın", "nun", "nin", "nün", "ın", "un", "in", "ün"];
             }
             return this.ekler;
         },
