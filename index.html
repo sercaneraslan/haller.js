@@ -134,8 +134,19 @@ $(function() {
     background: #FFF;
 }
 input {
-    height: 30px;
+    color: #999999;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    border-radius: 4px 4px 4px 4px;
     font-size: 14px;
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 10px;
+    padding: 4px 6px;
+    vertical-align: middle;
+    width: 206px;
+    -moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
 }
 </style>
 
@@ -178,8 +189,8 @@ ve iyelik ekini</p>
 <p>Formu doldurunuz:</p>
 
 <p>
-  <input type="text" id="isim" value="İsmi giriniz..."/>
-  <input type="text" id="hal" value="Halini giriniz..."/>
+  <input type="text" id="isim" placeholder="İsmi giriniz..."/>
+  <input type="text" id="hal" placeholder="Halini giriniz..."/>
   <input type="submit" id="gonder" value="Gönder" />
   <div id="sonucDiv">
     <p id="sonuc"></p>
