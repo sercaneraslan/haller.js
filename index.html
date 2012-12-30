@@ -116,6 +116,13 @@ $(function() {
             haller = new Haller(isim, hal);
             sonuc = haller.calistir();
 
+        if(isim == ''){
+            $("#sonuc").text("Lütfen İsim giriniz!");
+        }
+        if(hal == ''){
+            $("#sonuc").text("Lütfen hal giriniz!");
+        }
+
         $("#sonuc").text(sonuc);
     });
 
