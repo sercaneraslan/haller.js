@@ -1,80 +1,101 @@
-function haller(isim, hal){
-    var isim = isim.charAt(0).toUpperCase() + isim.slice(1),
-        sesliHarfler = ["a", "ı", "o", "u", "e", "i", "ö", "ü"],
-        sertUnsuzler = ["f", "s", "t", "k", "ç", "ş", "h", "p"],
-        sapkaliHarfIsimleri = ["Alp", "Şevval", "Kemal", "Bilal", "Nihal", "Hilal", "Meral", "Resul", "Celal", "Cemal"],
-        harf = sesliHarfler.indexOf(isim.substr(isim.length-1,1)),
-        harf2 = sesliHarfler.indexOf(isim.substr(isim.length-2,1)),
-        harf3 = sesliHarfler.indexOf(isim.substr(isim.length-3,1)),
-        sonuSertUnsuz = sertUnsuzler.indexOf(isim.substr(isim.length-1,1)),
-        sapkaliIsimler = sapkaliHarfIsimleri.indexOf(isim),
-        ekinSonHarfi,
-        ekler,
-        ek,
+/*
+*
+* Haller.js v1.0
+* sercaneraslan.com
+*
+*/
 
-        eklereKararVer = function(){
-            if(hal == "e"){
-                ekler = ["ya", "ye", "a", "e"];
-            }else if(hal == "de"){
-                ekler = ["da", "de", "da", "de"];
-            }else if(hal == "den"){
-                ekler = ["dan", "den", "dan", "den"];
-            }else if(hal == "i"){
-                ekler = ["yı", "yu", "yi", "yü", "ı", "u", "i", "ü"];
-            }else if(hal == "iyelik"){
-                ekler = ["nın", "nun", "nin", "nün", "ın", "un", "in", "ün"];
+(function(){
+
+    function Haller(isim, hal){
+        this.isim                = isim.charAt(0).toUpperCase() + isim.slice(1);
+        this.hal                 = hal;
+        this.sesliHarfler        = ["a", "ı", "o", "u", "e", "i", "ö", "ü"];
+        this.sertUnsuzler        = ["f", "s", "t", "k", "ç", "ş", "h", "p"];
+        this.sapkaliHarfIsimleri = ["Alp", "Şevval", "Kemal", "Bilal", "Nihal", "Hilal", "Meral", "Resul", "Celal", "Cemal"];
+        this.harf                = this.sesliHarfler.indexOf(this.isim.substr(this.isim.length-1,1));
+        this.harf2               = this.sesliHarfler.indexOf(this.isim.substr(this.isim.length-2,1));
+        this.harf3               = this.sesliHarfler.indexOf(this.isim.substr(this.isim.length-3,1));
+        this.sonuSertUnsuz       = this.sertUnsuzler.indexOf(this.isim.substr(this.isim.length-1,1));
+        this.sapkaliIsimler      = this.sapkaliHarfIsimleri.indexOf(this.isim);
+        this.ekinSonHarfi;
+        this.ekler;
+        this.ek;
+    }
+
+    Haller.prototype = {
+        eklereKararVer: function(){
+            if(this.hal == "e"){
+              this.ekler = ["ya", "ye", "a", "e"];
             }
-            return ekler;
+            else if(this.hal == "de"){
+              this.ekler = ["da", "de", "da", "de"];
+            }
+            else if(this.hal == "den"){
+              this.ekler = ["dan", "den", "dan", "den"];
+            }
+            else if(this.hal == "i"){
+              this.ekler = ["yı", "yu", "yi", "yü", "ı", "u", "i", "ü"];
+            }
+            else if(this.hal == "iyelik"){
+              this.ekler = ["nın", "nun", "nin", "nün", "ın", "un", "in", "ün"];
+            }
+            return this.ekler;
         },
-
-        ekiOlustur = function(a,b,c,d,e,f){
-            if(hal == "i" || hal == "iyelik"){
-                if(harf == 0 || harf == 1){
-                    ek = ekler[a];
-                }else if(harf == 2 || harf == 3){
-                    ek = ekler[b];
-                }else if(harf == 4 || harf == 5){
-                    ek = ekler[c];
-                }else if(harf == 6 || harf == 7){
-                    ek = ekler[d];
+        ekiOlustur: function(a,b,c,d,e,f){
+            if(this.hal == "i" || this.hal == "iyelik"){
+                if(this.harf == 0 || this.harf == 1){
+                    this.ek = this.ekler[a];
+                }
+                else if(this.harf == 2 || this.harf == 3){
+                    this.ek = this.ekler[b];
+                }
+                else if(this.harf == 4 || this.harf == 5){
+                    this.ek = this.ekler[c];
+                }
+                else if(this.harf == 6 || this.harf == 7){
+                    this.ek = this.ekler[d];
                 }
             }else{
-                (harf <= 3) ? ek = ekler[e] : ek = ekler[f];
+                (this.harf <= 3) ? this.ek = this.ekler[e] : this.ek = this.ekler[f];
             }
-            return ek;
+            return this.ek;
         },
+        ekeKararVer : function(){
+            this.ekiOlustur(0,1,2,3,0,1);
 
-        ekeKararVer = function(){
-            ekiOlustur(0,1,2,3,0,1);
-
-            if(harf == -1){
-                (harf2 == -1) ? harf = harf3 : harf = harf2;
-                ekiOlustur(4,5,6,7,2,3);
+            if(this.harf == -1){
+                (this.harf2 == -1) ? this.harf = this.harf3 : this.harf = this.harf2;
+                this.ekiOlustur(4,5,6,7,2,3);
             }
-            return ek;
+            return this.ek;
         },
-
-        sapkaliHarfVarMi = function(){
-            if(sapkaliIsimler !== -1){
-                (hal == "i" || hal == "iyelik") ? ek = ekler[6] : ek = ekler[3];
+        sapkaliHarfVarMi: function(){
+            if(this.sapkaliIsimler !== -1){
+                (this.hal == "i" || this.hal == "iyelik") ? this.ek = this.ekler[6] : this.ek = this.ekler[3];
             }
-            return ek;
+            return this.ek;
         },
-
-        sonuSertUnsuzMu = function(){
-            if(sonuSertUnsuz !== -1){
-                if(hal == "de" || hal == "den"){
-                    ekinSonHarfi = ek.slice(1, 3);
-                    ek = "t" + ekinSonHarfi;
+        sonuSertUnsuzMu: function(){
+            if(this.sonuSertUnsuz !== -1){
+                if(this.hal == "de" || this.hal == "den"){
+                    ekinSonHarfi = this.ek.slice(1, 3);
+                    this.ek = "t" + ekinSonHarfi;
                 }
             }
-            return ek;
-        };
+            return this.ek;
+        },
+        calistir: function(){
+            this.eklereKararVer();
+            this.ekeKararVer();
+            this.sapkaliHarfVarMi();
+            this.sonuSertUnsuzMu();
+            return this.isim + "'" + this.ek;
+        }
+    }
 
-    eklereKararVer();
-    ekeKararVer();
-    sapkaliHarfVarMi();
-    sonuSertUnsuzMu();
+    var haller = new Haller('sercan', 'de'),
+        sonuc = haller.calistir();
 
-    return isim + "'" + ek;
-}
+    return sonuc;
+}());
