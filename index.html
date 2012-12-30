@@ -112,12 +112,18 @@ $(function() {
 
     $("#gonder").click(function(){
         var isim = $("#isim").val(),
-            hal = $("#hal").val();
+            hal = $("#hal").val(),
+            ekler = ["e", "i", "de", "den", "iyelik"],
+            eklerDogruMu = ekler.indexOf(isim);
 
         if(isim !== '' && hal !== ''){
-            var haller = new Haller(isim, hal),
-                sonuc = haller.calistir();
-            $("#sonuc").text(sonuc);
+            if(eklerDogruMu !== -1){
+                var haller = new Haller(isim, hal),
+                    sonuc = haller.calistir();
+                $("#sonuc").text(sonuc);
+            }else {
+                $("#sonuc").text("Lütfen doğru bilgileri giriniz!");
+            }
         }else {
             $("#sonuc").text("Lütfen eksik bilgileri giriniz!");
         }
