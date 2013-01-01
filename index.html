@@ -24,8 +24,8 @@
 $(function() {
   
     function Haller(isim, hal){
-        this.isim                = isim.charAt(0).toUpperCase() + isim.slice(1);
-        this.hal                 = hal;
+        this.isim                = isim.charAt(0).toUpperCase() + isim.slice(1).toLowerCase();
+        this.hal                 = hal.toLowerCase();
         this.sesliHarfler        = ["a", "ı", "o", "u", "e", "i", "ö", "ü"];
         this.sertUnsuzler        = ["f", "s", "t", "k", "ç", "ş", "h", "p"];
         this.sapkaliHarfIsimleri = ["Alp", "Şevval", "Kemal", "Bilal", "Nihal", "Hilal", "Meral", "Resul", "Celal", "Cemal"];
