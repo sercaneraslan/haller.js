@@ -7,14 +7,14 @@
 (function(){
 
     function Haller(isim, hal){
-        this.isim = isim.charAt(0).toUpperCase() + isim.slice(1);
-        this.hal = hal;
+        this.isim = isim.charAt(0).toUpperCase() + isim.slice(1).toLowerCase();
+        this.hal = hal.toLowerCase();
     }
 
     Haller.prototype = {
-        sesliHarfler                : ["a", "ı", "o", "u", "e", "i", "ö", "ü"],
-        sertUnsuzler                : ["f", "s", "t", "k", "ç", "ş", "h", "p"],
-        sapkaliHarfIcerenIsimler    : ["Alp", "Şevval", "Kemal", "Bilal", "Nihal", "Hilal", "Meral", "Resul", "Celal", "Cemal"],
+        sesliHarfler : ["a", "ı", "o", "u", "e", "i", "ö", "ü"],
+        sertUnsuzler : ["f", "s", "t", "k", "ç", "ş", "h", "p"],
+        sapkaliHarfIcerenIsimler : ["Alp", "Şevval", "Kemal", "Bilal", "Nihal", "Hilal", "Meral", "Resul", "Celal", "Cemal"],
 
         isminSonSesliHarfi: function(sayi){
             return this.sesliHarfler.indexOf(this.isim.substr(this.isim.length-sayi,1));
@@ -90,7 +90,7 @@
         }
     }
 
-    var haller = new Haller('sercan', 'de'),
+    var haller = new Haller('Sercan', 'de'),
         sonuc = haller.calistir();
 
     return sonuc;
