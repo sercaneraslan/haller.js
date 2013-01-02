@@ -14,7 +14,7 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <title>Haller.js by skatersercan</title>
+    <title>Haller.js - İsimlere bi haller oluyor...</title>
   </head>
 <script>
 
@@ -28,8 +28,8 @@
 $(function() {
   
     function Haller(isim, hal){
-        this.isim = isim.charAt(0).toUpperCase() + isim.slice(1).toLowerCase();
-        this.hal = hal.toLowerCase();
+        this.isim = isim.charAt(0).toUpperCase() + isim.slice(1);
+        this.hal = hal;
     }
 
     Haller.prototype = {
