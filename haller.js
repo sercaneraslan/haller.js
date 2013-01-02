@@ -15,7 +15,7 @@ var Haller = (function(){
     Haller.prototype = {
         sesliHarfler : ["a", "ı", "o", "u", "e", "i", "ö", "ü"],
         sertUnsuzler : ["f", "s", "t", "k", "ç", "ş", "h", "p"],
-        sapkaliHarfIcerenIsimler : ["Alp", "Şevval", "Kemal", "Bilal", "Nihal", "Hilal", "Meral", "Resul", "Celal", "Cemal"],
+        sapkaliHarfIcerenIsimler : ["Alp", "Şevval", "Kemal", "Bilal", "Nihal", "Hilal", "Meral", "Resul", "Celal", "Cemal", "Seval"],
 
         isminSonSesliHarfi: function(sayi){
             return this.sesliHarfler.indexOf(this.isim.substr(this.isim.length-sayi,1));
