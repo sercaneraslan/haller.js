@@ -7,8 +7,8 @@
 (function(){
 
     function Haller(isim, hal){
-        this.isim = isim.charAt(0).toUpperCase() + isim.slice(1).toLowerCase();
-        this.hal = hal.toLowerCase();
+        this.isim = isim.charAt(0).toUpperCase() + isim.slice(1);
+        this.hal = hal;
     }
 
     Haller.prototype = {
