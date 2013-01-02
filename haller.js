@@ -4,11 +4,12 @@
 * sercaneraslan.com
 *
 */
-(function(){
+var Haller = (function(){
 
     function Haller(isim, hal){
         this.isim = isim.charAt(0).toUpperCase() + isim.slice(1);
         this.hal = hal;
+        this.calistir();
     }
 
     Haller.prototype = {
@@ -86,12 +87,16 @@
             this.ekeKararVer();
             this.sapkaliHarfVarMi();
             this.sonuSertUnsuzMu();
-            return this.isim + "'" + this.ek;
+
+        },
+        toString : function () {
+            return this.isim + "'" + this.ek;        
         }
     }
 
-    var haller = new Haller('Sercan', 'de'),
-        sonuc = haller.calistir();
-
-    return sonuc;
+    return Haller;    
 }());
+
+//ornek
+var sonuc = new Haller('Sercan', 'de');
+console.log("Sonuc : " + sonuc, sonuc, sonuc.toString());
