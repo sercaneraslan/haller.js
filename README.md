@@ -1,6 +1,6 @@
 Haller.js
 =========
 
-Lütfen sayfayı ziyaret ediniz. 
+Kütüphane ile ilgili bilgileri aşağıda ki linkten alabilirsiniz. 
 
 http://skatersercan.github.com/Haller.js/
