@@ -3,11 +3,11 @@
 * Haller.js v2.0
 * sercaneraslan.com
 *
-* Kullanımı örnekleri:
+* Kullanımı örnekleri :
 * console.log(Hal("sercan","de"));      > sercan'da
 * console.log(Hal("murat","iyelik"));   > murat'ın
 * console.log(Hal("osman","i"));        > osman'ı
-* console.log(Hal("alp","de"));         > alp'te
+* console.log(Hal("alp","den"));         > alp'ten
 * console.log(Hal("cemal","e"));        > cemal'e
 */
 var Hal = function(isim, hal, undefined) {
