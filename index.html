@@ -11,105 +11,92 @@
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 
     <title>Haller.js - İsimlere bi haller oluyor...</title>
   </head>
 <script>
-
 /*
 *
-* Haller.js v1.0
+* Haller.js v2.0
 * sercaneraslan.com
 *
+* Kullanımı örnekleri :
+* console.log(Hal("sercan","de"));      > sercan'da
+* console.log(Hal("murat","iyelik"));   > murat'ın
+* console.log(Hal("osman","i"));        > osman'ı
+* console.log(Hal("alp","den"));        > alp'ten
+* console.log(Hal("cemal","e"));        > cemal'e
 */
-
 $(function() {
-  
-    function Haller(isim, hal){
-        this.isim = isim.charAt(0).toUpperCase() + isim.slice(1);
-        this.hal = hal;
-    }
+    var Hal = function(isim, hal, undefined) {
+        var sesliHarfler = 'aıeiouöü',
+            sertUnsuzler = 'fstkçşhp',
+            iyelik = 'iyelik',
+            iHali = 'i',
+            eHali = 'e',
+            deHali = 'de',
+            denHali = 'den',
+            ekKontrolleri = {0 : 'ı', 1 : 'ı', 2 : 'i', 3 : 'i', 4 : 'u', 5 : 'u', 6 : 'ü', 7 : 'ü'},
+            sonSesliIndex,
+            sesliler=[],
+            oncekiSesli,
+            sonSesli,
+            sonHarf,
+            istisna,
+            code,
+            ek,
+            i;
 
-    Haller.prototype = {
-        sesliHarfler : ["a", "ı", "o", "u", "e", "i", "ö", "ü"],
-        sertUnsuzler : ["f", "s", "t", "k", "ç", "ş", "h", "p"],
-        sapkaliHarfIcerenIsimler : ["Alp", "Şevval", "Kemal", "Bilal", "Nihal", "Hilal", "Meral", "Resul", "Celal", "Cemal"],
-
-        isminSonSesliHarfi: function(sayi){
-            return this.sesliHarfler.indexOf(this.isim.substr(this.isim.length-sayi,1));
-        },
-        eklereKararVer: function(){
-            if(this.hal == "e"){
-                this.ekler = ["ya", "ye", "a", "e"];
-            }
-            else if(this.hal == "de"){
-                this.ekler = ["da", "de", "da", "de"];
-            }
-            else if(this.hal == "den"){
-                this.ekler = ["dan", "den", "dan", "den"];
-            }
-            else if(this.hal == "i"){
-                this.ekler = ["yı", "yu", "yi", "yü", "ı", "u", "i", "ü"];
-            }
-            else if(this.hal == "iyelik"){
-                this.ekler = ["nın", "nun", "nin", "nün", "ın", "un", "in", "ün"];
-            }
-            return this.ekler;
-        },
-        ekiOlustur: function(a,b,c,d,e,f){
-            if(this.hal == "i" || this.hal == "iyelik"){
-                if(this.harf == 0 || this.harf == 1){
-                    this.ek = this.ekler[a];
-                }
-                else if(this.harf == 2 || this.harf == 3){
-                    this.ek = this.ekler[b];
-                }
-                else if(this.harf == 4 || this.harf == 5){
-                    this.ek = this.ekler[c];
-                }
-                else if(this.harf == 6 || this.harf == 7){
-                    this.ek = this.ekler[d];
-                }
-            }else{
-                (this.harf <= 3) ? this.ek = this.ekler[e] : this.ek = this.ekler[f];
-            }
-            return this.ek;
-        },
-        ekeKararVer: function(){
-            this.harf = this.isminSonSesliHarfi(1);
-            this.ekiOlustur(0,1,2,3,0,1);
-
-            if(this.harf == -1){
-                (this.isminSonSesliHarfi(2) == -1) ? this.harf = this.isminSonSesliHarfi(3) : this.harf = this.isminSonSesliHarfi(2);
-                this.ekiOlustur(4,5,6,7,2,3);
-            }
-            return this.ek;
-        },
-        sapkaliHarfVarMi: function(){
-            if(this.sapkaliHarfIcerenIsimler.indexOf(this.isim) !== -1){
-                (this.hal == "i" || this.hal == "iyelik") ? this.ek = this.ekler[6] : this.ek = this.ekler[3];
-            }
-            return this.ek;
-        },
-        sonuSertUnsuzMu: function(){
-            if(this.sertUnsuzler.indexOf(this.isim.substr(this.isim.length-1,1)) !== -1){
-                if(this.hal == "de" || this.hal == "den"){
-                    this.ekinSonHarfi = this.ek.slice(1, 3);
-                    this.ek = "t" + this.ekinSonHarfi;
-                }
-            }
-            return this.ek;
-        },
-        calistir: function(){
-            this.eklereKararVer();
-            this.ekeKararVer();
-            this.sapkaliHarfVarMi();
-            this.sonuSertUnsuzMu();
-            return this.isim + "'" + this.ek;
+        for (i in isim) {    // Ismin her bir harfi icin...
+            // Eger bu harf sesli ise sesliler listesine harf sira numarasini ekle,
+            // bu harfin isimdeki sira numarasini sonSesliIndex degiskenine ata (integer'a cevir)
+            (code = sesliHarfler.indexOf(isim[i])) > -1 && (sesliler.push(code) & (sonSesliIndex = ~~i));
+            // Bu harfi sonHarf degiskenine al
+            sonHarf = isim[i];
         }
-    }
+        
+        sonSesli = sesliler.pop();
+
+        // Sapkali harf istisnasi var mı? Orn: Alp, Resul, Cemal...
+        if ( sonSesli == 0 || sonSesli == 5) {    // Son sesli harf a veya u ise
+            // son sesliden sonraki harf l ise
+            if (isim[sonSesliIndex + 1] == 'l') {
+                // onceki sesli e veya i ise ya da isim tek hece ise
+                oncekiSesli = sesliler.pop();
+                if ( oncekiSesli == undefined || oncekiSesli == 2 || oncekiSesli == 3) {
+                    istisna = 1;
+                }
+            }
+        }
+
+        ek = (hal == iyelik || hal == iHali) ?    // iyelik veya i hali ise
+                // sonSesli degiskeninin degeriyle ekKontrolleri objesinin n inci elemanına karsilik gelen obje degerini alır
+                ekKontrolleri[istisna ? sonSesli+2 : sonSesli]
+           : // e, de ve den hali ise
+                // Son sesli harf a, ı, o veya u ise ek a (istisna var ise e ), e, i, ö veya ü ise ek e harfi
+                ((sonSesli <= 1 || sonSesli == 4 || sonSesli == 5) ? istisna ? 'e' : 'a' : 'e');
+
+        // Kaynaştırma harflerini ekler
+        if ( sesliHarfler.indexOf( sonHarf ) > -1 ) {    // Son harf sesli harf ise
+            // hal iyelik ise ek in basina n harfi ekler, hal i ve e hali ise ek in basina y harfi ekler
+            ek = (hal == iyelik) ? 'n' + ek : (hal == iHali || hal == eHali) ? 'y' + ek : ek;
+        }
+
+        // Harf yumusamalarini kontrol eder
+        if (hal == deHali || hal == denHali) {    // de veya den hali ise
+            // Son harf sert ünsüz ise ek in basina t harfi ekler degilse d harfi ekler
+            ek = (sertUnsuzler.indexOf( sonHarf ) > -1 ? 't' : 'd') + ek;
+        }
+
+        // iyelik veya den hali icin ek in sonuna n harfi ekler
+        if (hal == iyelik || hal == denHali) {
+            ek += 'n' 
+        }
+
+        return isim + "'" + ek;
+    };
 
     $("#gonder").click(function(){
         var isim = $("#isim").val(),
@@ -119,8 +106,7 @@ $(function() {
 
         if(isim !== '' && hal !== ''){
             if(eklerDogruMu !== -1){
-                var haller = new Haller(isim, hal),
-                    sonuc = haller.calistir();
+                  var sonuc = Hal(isim, hal);
                 $("#sonuc").text(sonuc);
             }else {
                 $("#sonuc").text("Lütfen doğru hal bilgisi giriniz!");
