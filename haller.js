@@ -17,7 +17,7 @@ var Hal = function(isim, hal) {
 
         // Ek in sesli harfine karar verir
         ek = (hal == iyelik || hal == iHali) ?	// iyelik veya i hali ise
-        		// Son sesli harf aıeiouöü harflerinin hangisine denk geliyorsa o index numarasıyla iEkleri nin n'inci elemanı seçilir
+        	// Son sesli harf aıeiouöü harflerinin hangisine denk geliyorsa o index numarasıyla iEkleri nin n'inci elemanı seçilir
                 iEkleri[ 'aıeiouöü'.indexOf(sonSesli) + istisna ]
             : // e, de veya den hali ise
             	// Son sesli harf a, ı, o veya u ise ek a (istisna var ise e ), e, i, ö veya ü ise ek e harfi
