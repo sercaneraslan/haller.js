@@ -17,7 +17,7 @@
 /*
 *
 * Haller.js v2.1
-* http://sercaneraslan.github.io/Selider/
+* http://sercaneraslan.github.io/Haller.js/
 *
 * Github : @sercaneraslan
 * Twitter : @sercan_eraslan
