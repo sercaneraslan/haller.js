@@ -41,5 +41,10 @@ var Hal = function(isim, hal) {
         ek += 'n'
     }
 
-    return isim + "'" + ek;
+    // Ilk harf büyük harf ise özel isim kabul ederek kesme işareti ekler, aksi halde cins isim kabul ederek kesme işareti eklemez
+    if (/^[A-Z]/.test(isim)) {
+      return isim + "'" + ek
+    }
+
+    return isim + ek;
 };
