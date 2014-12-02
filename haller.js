@@ -15,7 +15,7 @@ var Hal = function(isim, hal) {
         denHali = 'den',
         iEkleri = 'ııiiuuüü',
         sonHarf = isim[isim.length - 1],
-        istisna = ~~/[ei][^ıüoö]*[au]l$|alp$/.test(isim) * 2,   // Sapkali harf istisnasi var mı kontrol eder Orn: Alp, Resul, Cemal... 0 veya 2 degeri doner
+        istisna = ~~/[ei][^ıüoö]*[au]l$|alp$/i.test(isim) * 2,   // Sapkali harf istisnasi var mı kontrol eder Orn: Alp, Resul, Cemal... 0 veya 2 degeri doner
         sonSesli = isim.toLowerCase().match(/[aıeiouöü]/g).pop(),   // seslilerden sonuncusunu alır
 
         // Ek in sesli harfine karar verir
@@ -42,7 +42,7 @@ var Hal = function(isim, hal) {
     }
 
     // Ilk harf büyük harf ise özel isim kabul ederek kesme işareti ekler, aksi halde cins isim kabul ederek kesme işareti eklemez
-    if (/^[A-Z]/.test(isim)) {
+    if (/^[A-Z|Ç|İ|Ş|Ü|Ö]/.test(isim)) {
       return isim + "'" + ek
     }
 
