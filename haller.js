@@ -9,42 +9,93 @@
 */
 var Hal = function(isim, hal) {
     var iyelik = 'iyelik',
-        iHali = 'i',
-        eHali = 'e',
-        deHali = 'de',
-        denHali = 'den',
-        iEkleri = 'ııiiuuüü',
-        sonHarf = isim[isim.length - 1],
+    iHali = 'i',
+    eHali = 'e',
+    deHali = 'de',
+    denHali = 'den',
+    iEkleri = 'ııiiuuüü',
+    sonHarf = isim[isim.length - 1],
         istisna = ~~/[ei][^ıüoö]*[au]l$|alp$/i.test(isim) * 2,   // Sapkali harf istisnasi var mı kontrol eder Orn: Alp, Resul, Cemal... 0 veya 2 degeri doner
+        yumusamalar = {'k': 'ğ', 't': 'd', 'p': 'b', 'ç': 'c'},
+        cinsIsimMi = !/^[A-ZÇİŞÜÖ]/.test(isim),
         sonSesli = isim.toLowerCase().match(/[aıeiouöü]/g).pop(),   // seslilerden sonuncusunu alır
-
-        // Ek in sesli harfine karar verir
+                // Ek in sesli harfine karar verir
         ek = (hal == iyelik || hal == iHali) ?  // iyelik veya i hali ise
-                // Son sesli harf aıeiouöü harflerinin hangisine denk geliyorsa o index numarasıyla iEkleri nin n'inci elemanı seçilir
-                iEkleri[ 'aıeiouöü'.indexOf(sonSesli) + istisna ]
-            : // e, de veya den hali ise
-                // Son sesli harf a, ı, o veya u ise ek a (istisna var ise e ), e, i, ö veya ü ise ek e harfi
-                (/[aıou]/.test(sonSesli)) ? istisna ? 'e' : 'a' : 'e';
+                    // Son sesli harf aıeiouöü harflerinin hangisine denk geliyorsa o index numarasıyla iEkleri nin n'inci elemanı seçilir
+                    iEkleri[ 'aıeiouöü'.indexOf(sonSesli) + istisna ]
+                : // e, de veya den hali ise
+                    // Son sesli harf a, ı, o veya u ise ek a (istisna var ise e ), e, i, ö veya ü ise ek e harfi
+                    (/[aıou]/.test(sonSesli)) ? istisna ? 'e' : 'a' : 'e';
 
-    // Kaynastirma harflerini ekler
-    if ( sonHarf == sonSesli ) {
-        ek = (hal == iyelik) ? 'n' + ek : (hal == iHali || hal == eHali) ? 'y' + ek : ek
-    }
+        // Kaynastirma harflerini ekler
+        if ( sonHarf == sonSesli ) {
+            if(cinsIsimMi) {
+                if (isim === 'su') {
+                    ek = (hal == iyelik) ? 'y' + ek : (hal == iHali || hal == eHali) ? 'y' + ek : ek
+                } 
+                // zamirlerdeki özel durumlar
+                else if (['o', 'bu', 'şu'].indexOf(isim) !== -1) {
+                    ek = (hal == iyelik) ? 'n' + ek : (hal == iHali || hal == eHali) ? 'n' + ek : ek
+                } else {
+                    ek = (hal == iyelik) ? 'n' + ek : (hal == iHali || hal == eHali) ? 'y' + ek : ek
+                }
 
-    // Harf yumusamalarini kontrol eder
-    if (hal == deHali || hal == denHali) {
-        ek = (/[fstkçşhp]/.test( sonHarf ) ? 't' : 'd') + ek
-    }
+            } else {
+                ek = (hal == iyelik) ? 'n' + ek : (hal == iHali || hal == eHali) ? 'y' + ek : ek
+            }
+        }
 
-    // Iyelik veya den hali icin ek in sonuna n harfi ekler
-    if (hal == iyelik || hal == denHali) {
-        ek += 'n'
-    }
+        // Harf yumusamalarini kontrol eder
+        if (hal == deHali || hal == denHali) {
+            if(cinsIsimMi && ['o', 'bu', 'şu'].indexOf(isim) !== -1) {
+                ek = 'nd' + ek;
+            } else {
+                ek = (/[fstkçşhp]/.test( sonHarf ) ? 't' : 'd') + ek;
+            }
+        }
 
-    // Ilk harf büyük harf ise özel isim kabul ederek kesme işareti ekler, aksi halde cins isim kabul ederek kesme işareti eklemez
-    if (/^[A-Z|Ç|İ|Ş|Ü|Ö]/.test(isim)) {
-      return isim + "'" + ek
-    }
+        // Iyelik veya den hali icin ek in sonuna n harfi ekler
+        if (hal == iyelik || hal == denHali) {
+            ek += 'n'
+        }
 
-    return isim + ek;
+        // Eğer cins isimse
+        if (cinsIsimMi) {
+
+            if ( hal === iyelik || hal === iHali || hal === eHali ) {
+                // Ünlü düşmesine maruz kalan kelimeleri tespit et
+                if (['gönül', 'bağır'].indexOf(isim) !== -1) {
+                    isim = isim.substr(0, isim.lastIndexOf(sonSesli)) + isim.substr(isim.lastIndexOf(sonSesli) + 1 );
+                }
+                // Ünsüz çiftlemesine maruz kalan kelimeler
+                else if(['hak'].indexOf(isim) !== -1) {
+                    isim = isim + sonHarf;
+                }
+                // Sert ünsüz yumuşamasını düzenler
+                else if(/[ktpç]/.test(sonHarf)) {
+                    // Tek heceliler genellikle bu kuraldan muaftır
+                    if (isim.match(/[aıeiouöü]/ig).length > 1) {
+                        // İstisna kelimelerden birisi mi
+                        if (isim === 'ahenk') {
+                            isim = isim.slice(0, -1) + 'g';
+                        } 
+                        // Yabancı kökenli bazı kelimelerde genelde yumuşama olmaz
+                        else if (['millet', 'devlet', 'hürriyet', 'sanat', 'hukuk', 'hayat'].indexOf(isim) === -1 && 
+                        // Fiil köklü bazı kelimeler de yumuşamaz
+                        ['konut', 'taşıt'].indexOf(isim) === -1 ) { 
+                            isim = isim.slice(0, -1) + yumusamalar[sonHarf];
+                    }             
+                } else {
+                        // İstisna tek heceli kelimelerden biri ise yumuşar
+                        if (['kap', 'kalp'].indexOf(isim) !== -1) {                      
+                            isim = isim.slice(0, -1) + yumusamalar[sonHarf];
+                        }
+                    }          
+                }
+            }
+        return isim + ek;
+    } 
+
+
+    return isim + "'" + ek;
 };
