@@ -18,7 +18,7 @@ var Hal = function(isim, hal, isimTuru) {
         sonHarf = isim[isim.length - 1],
         yumusamalar = {'k': 'ğ', 't': 'd', 'p': 'b', 'ç': 'c'},
         istisna = ~~/[ei][^ıüoö]*[au]l$|alp$/.test(isim) * 2,   // Sapkali harf istisnasi var mı kontrol eder Orn: Alp, Resul, Cemal... 0 veya 2 degeri doner
-        sonSesli = isim.match(/[aıeiouöü]/g).pop(),   // seslilerden sonuncusunu alır
+        sonSesli = isim.toLowerCase().match(/[aıeiouöü]/ig).pop(),   // seslilerden sonuncusunu alır
 
         // Ek in sesli harfine karar verir
         ek = (hal == iyelik || hal == iHali) ?  // iyelik veya i hali ise
