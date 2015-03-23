@@ -1,215 +1,67 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="Description" content="Haller.js - İsimlerin hal eklerini ve iyelik ekini üreten bir JavaScript kütüphanesidir."/>
+        <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="styles/main.css"/>
+        <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+        <script src="https://raw.githubusercontent.com/sercaneraslan/haller.js/master/haller.js"></script>
+        <script src="scripts/main.js"></script>
+        <title>Haller.js</title>
+    </head>
+    <body>
+        <header>
+            <div class="inner">
+                <h1>Haller.js</h1>
+                <a href="https://github.com/skatersercan/Haller.js" class="button"><small>Sercan Eraslan</small>GitHub</a>
+            </div>
+        </header>
+        <div id="content-wrapper">
+            <div class="inner">
+                <section id="main-content">
+                    <h3>Haller.js Nedir?</h3>
 
-    <!--[if lt IE 9]>
-<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
+                    <p>İsimlerin hal eklerini ve iyelik ekini üreten bir JavaScript kütüphanesidir.</p>
 
-    <title>Haller.js - İsimlere bi haller oluyor...</title>
-  </head>
-<script>
-$(function() {
-/*
-*
-* Haller.js v2.1
-* sercaneraslan.com
-*
-*/
-var Hal = function(isim, hal) {
-    var iyelik = 'iyelik',
-        iHali = 'i',
-        eHali = 'e',
-        deHali = 'de',
-        denHali = 'den',
-        iEkleri = 'ııiiuuüü',
-        sonHarf = isim[isim.length - 1],
-        istisna = ~~/[ei][^ıüoö]*[au]l$|alp$/.test(isim) * 2, // Sapkali harf istisnasi var mı kontrol eder Orn: Alp, Resul, Cemal... 0 veya 2 degeri doner
-        sonSesli = isim.match(/[aıeiouöü]/g).pop(), // seslilerden sonuncusunu alır
+                    <p>İsimlerin;</p>
 
-        // Ek in sesli harfine karar verir
-        ek = (hal == iyelik || hal == iHali) ? // iyelik veya i hali ise
-                // Son sesli harf aıeiouöü harflerinin hangisine denk geliyorsa o index numarasıyla iEkleri nin n'inci elemanı seçilir
-                iEkleri[ 'aıeiouöü'.indexOf(sonSesli) + istisna ]
-            : // e, de veya den hali ise
-                // Son sesli harf a, ı, o veya u ise ek a (istisna var ise e ), e, i, ö veya ü ise ek e harfi
-                (/[aıou]/.test(sonSesli)) ? istisna ? 'e' : 'a' : 'e';
+                    <ul>
+                        <li>-e halini</li>
+                        <li>-i halini</li>
+                        <li>-de halini</li>
+                        <li>-den halini</li>
+                        <li>iyelik ekini</li>
+                    </ul>
 
-    // Kaynastirma harflerini ekler
-    if ( sonHarf == sonSesli ) {
-        ek = (hal == iyelik) ? 'n' + ek : (hal == iHali || hal == eHali) ? 'y' + ek : ek
-    }
+                    <p>üretir.</p>
 
-    // Harf yumusamalarini kontrol eder
-    if (hal == deHali || hal == denHali) {
-        ek = (/[fstkçşhp]/.test( sonHarf ) ? 't' : 'd') + ek
-    }
+                    <h3>Nasıl Çalışır?</h3>
 
-    // Iyelik veya den hali icin ek in sonuna n harfi ekler
-    if (hal == iyelik || hal == denHali) {
-        ek += 'n'
-    }
+                    <p>Herhangi bir isim ve isim halini ya da iyelik ekini giriniz ve sonra "Oluştur" butonuna tıklayınız.</p>
 
-    return isim + "'" + ek;
-};
+                    <p>
+                        <input type="text" id="yourName" placeholder="İsim giriniz..."/>
+                        <input type="text" id="nameStatus" placeholder="Hal / Ek giriniz..."/>
+                        <button id="send" type="submit">Oluştur</button>
+                    </p>
 
-    $("#gonder").click(function(){
-        var isim = $("#isim").val(),
-            hal = $("#hal").val(),
-            ekler = ["e", "i", "de", "den", "iyelik"],
-            eklerDogruMu = ekler.indexOf(hal);
+                    <div class="white-box" id="result">...</div>
 
-        if(isim !== '' && hal !== ''){
-            if(eklerDogruMu !== -1){
-                  var sonuc = Hal(isim, hal);
-                $("#sonuc").text(sonuc);
-            }else {
-                $("#sonuc").text("Lütfen doğru hal bilgisi giriniz!");
-            }
-        }else {
-            $("#sonuc").text("Lütfen eksik bilgileri giriniz!");
-        }
-    });
+                    <h3>Nasıl Kullanılır?</h3>
 
-});
-  
-</script>
+                    <p>Hal fonksiyonu 2 parametre ile çalıştırılır. İlk parametre "isim" ikinci parametre ise "hal" ya da "iyelik" ekidir. Örneğin:</p>
 
-<style type="text/css">
-#sonucDiv {
-    height: 40px;
-    width: 355px;
-    padding: 10px;
-    border: 1px solid #DBDBDB;
-    font-size: 18px;
-    background: #FFF;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-}
-input {
-    color: #999999;
-    background-color: #FFFFFF;
-    border: 1px solid #CCCCCC;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    font-size: 14px;
-    height: 20px;
-    line-height: 20px;
-    margin-bottom: 10px;
-    padding: 4px 6px;
-    vertical-align: middle;
-    width: 130px;
-    -moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
-}
-#gonder {
-    border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
-   -moz-border-bottom-colors: none;
-    -moz-border-image: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    background-color: #F5F5F5;
-    background-image: -moz-linear-gradient(center top , #FFFFFF, #E6E6E6);
-    background-repeat: repeat-x;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #A2A2A2;
-    border-radius: 4px 4px 4px 4px;
-    border-style: solid;
-    border-width: 1px;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
-    color: #333333;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 14px;
-    line-height: 20px;
-    margin-bottom: 0;
-    padding: 3px 12px;
-    text-align: center;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-    vertical-align: top;
-}
-</style>
-
-  <body>
-    <header>
-      <div class="inner">
-        <h1>Haller.js</h1>
-        <h2>İsimlere bi haller oluyor...</h2>
-        <a href="https://github.com/skatersercan/Haller.js" class="button"><small>Sercan Eraslan</small>GitHub</a>
-      </div>
-    </header>
-
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-        <h3>Haller.js Nedir?</h3>
-
-<p>İsimlerin hal eklerini ve iyelik ekini üreten bir JavaScript kütüphanesidir.</p>
-
-<p>İsimlerin:</p>
-
-<ul>
-    <li>-e halini</li>
-    <li>-i halini</li>
-    <li>-de halini</li>
-    <li>-den halini</li>
-    <li>iyelik ekini</li>
-</ul>
-
-<p>üretir.</p>
-
-<h3>Nasıl Çalışır?</h3>
-
-<p>Herhangi bir isim ve isim hali giriniz ve sonra "Oluştur" butonuna tıklayınız.</p>
-
-<p>
-  <input type="text" id="isim" placeholder="İsmi giriniz..."/>
-  <input type="text" id="hal" placeholder="Hali giriniz..."/>
-  <button id="gonder" type="submit">Oluştur</button>
-  <div id="sonucDiv">
-    <p id="sonuc"></p>
-  </div>
-</p>
-
-<h3>Nasıl Kullanılır?</h3>
-
-<p>Hal fonksiyonu parametreler ile çalıştırılır. İlk parametre "isim" ikinci parametre ise "hal" yada "iyelik" ekidir.</p>
-<p>Örneğin: </p>
-
-<pre>
-        sonuc = Hal("sercan","de");
-</pre>
-
-<p>Bu örnekte "sonuc" değişkenine "Sercan'da" değeri tanımlanmış olacak.</p>
-
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/skatersercan/Haller.js/zipball/master" class="button">
-            <small>İndir</small>
-            .zip
-          </a>
-          <a href="https://github.com/skatersercan/Haller.js/tarball/master" class="button">
-            <small>İndir</small>
-            .tar.gz
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/skatersercan/Haller.js"></a> Proje Sahibi <a href="http://www.sercaneraslan.com">sercaneraslan.com</a>.</p>
-
-        </aside>
-      </div>
-    </div>
-
-  
-  </body>
+                    <div class="white-box">
+                        sercanDeHali = Hal("Sercan", "de");
+                    </div>
+                    <div class="white-box">
+                        sercanIyelikEki = Hal("Sercan", "iyelik");
+                    </div>
+                </section>
+            </div>
+        </div>
+    </body>
 </html>
