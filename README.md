@@ -1,7 +1,7 @@
 Haller.js
 =========
 
-Kütüphane ile ilgili bilgileri <a href="http://sercaneraslan.com/haller.js/">siteden</a> alabilirsiniz.
+<a href="http://sercaneraslan.com/haller.js/">http://sercaneraslan.com/haller.js/</a>
 
 ### Portlar
 
