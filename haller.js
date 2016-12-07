@@ -16,7 +16,7 @@ var Hal = function(isim, hal) {
         iEkleri = 'ııiiuuüü',
         sonHarf = isim[isim.length - 1],
         istisna = ~~/[ei][^ıüoö]*[au]l$|alp$/.test(isim) * 2,   // Sapkali harf istisnasi var mı kontrol eder Orn: Alp, Resul, Cemal... 0 veya 2 degeri doner
-        sonSesli = isim.match(/[aıeiouöü]/g).pop(),   // seslilerden sonuncusunu alır
+        sonSesli = isim.toLowerCase().match(/[aıeiouöü]/g).pop(),   // seslilerden sonuncusunu alır
 
         // Ek in sesli harfine karar verir
         ek = (hal == iyelik || hal == iHali) ?  // iyelik veya i hali ise
@@ -41,5 +41,10 @@ var Hal = function(isim, hal) {
         ek += 'n'
     }
 
-    return isim + "'" + ek;
+    // Ilk harf büyük harf ise özel isim kabul ederek kesme işareti ekler, aksi halde cins isim kabul ederek kesme işareti eklemez
+    if (/^[A-Z]/.test(isim)) {
+      return isim + "'" + ek
+    }
+
+    return isim + ek;
 };
