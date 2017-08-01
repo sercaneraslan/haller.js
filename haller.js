@@ -15,7 +15,7 @@ var Hal = function(isim, hal) {
         denHali = 'den',
         iEkleri = 'ııiiuuüü',
         sonHarf = isim[isim.length - 1],
-        istisna = ~~/[ei][^ıüoö]*[au]l$|alp$/.test(isim) * 2,   // Sapkali harf istisnasi var mı kontrol eder Orn: Alp, Resul, Cemal... 0 veya 2 degeri doner
+        istisna = ~~/[ei][^ıüoö\s]*[au]l$|alp$/.test(isim) * 2,   // Sapkali harf istisnasi var mı kontrol eder Orn: Alp, Resul, Cemal... 0 veya 2 degeri doner
         sonSesli = isim.match(/[aıeiouöü]/g).pop(),   // seslilerden sonuncusunu alır
 
         // Ek in sesli harfine karar verir
