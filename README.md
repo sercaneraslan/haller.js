@@ -1,9 +1,9 @@
 Haller.js
 =========
 
-Sadece insanlara ait özel isimlerin hal eklerini ve iyelik ekini üreten bir JavaScript kütüphanesidir. <a href="http://sercaneraslan.com/haller.js/">http://sercaneraslan.com/haller.js/</a>
+Sadece insanlara ait özel isimlerin hal eklerini ve iyelik ekini üreten bir JavaScript kütüphanesidir. Detaylar için: <a href="http://sercaneraslan.com/haller.js/">haller.js</a>
 
-### Ekler
+## Ekler
 
 | Durum                            | Ekler  | Örnek      |
 |----------------------------------|--------|------------|
@@ -13,8 +13,17 @@ Sadece insanlara ait özel isimlerin hal eklerini ve iyelik ekini üreten bir Ja
 | Ayrılma Hali                     | -den   | Sercan'dan |
 | İyelik Eki                       | -m -n  | Sercan'ın  |
 
-### Portlar
+## Portlar
 
 * @sonsuzdongu 'den PHP Portu: https://github.com/sonsuzdongu/haller.php
 * @canvural 'dan Ruby Portu: https://github.com/canvural/Haller.rb
-* @veysiertekin 'den JAVA portu: https://github.com/veysiertekin/turkish-noun-cases
+* @veysiertekin 'den JAVA Portu: https://github.com/veysiertekin/turkish-noun-cases
+
+## Katkı
+Her türlü katkıda bulunabilirsiniz.
+
+## Lisans
+MIT Lisansı.
+
+## Author
+Copyright © 2012 Sercan Eraslan
