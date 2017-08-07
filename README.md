@@ -1,5 +1,4 @@
-Haller.js
-=========
+# Haller.js
 
 Sadece insanlara ait özel isimlerin hal eklerini ve iyelik ekini üreten bir JavaScript kütüphanesidir. Detaylar için: <a href="http://sercaneraslan.com/haller.js/">haller.js</a>
 
@@ -25,5 +24,5 @@ Her türlü katkıda bulunabilirsiniz.
 ## Lisans
 MIT Lisansı.
 
-## Author
-Copyright © 2012 Sercan Eraslan
+## Yazar
+Telif Hakkı © 2012 Sercan Eraslan
