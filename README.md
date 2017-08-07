@@ -1,9 +1,11 @@
 Haller.js
 =========
 
-<a href="http://sercaneraslan.com/haller.js/">http://sercaneraslan.com/haller.js/</a>
+Sadece insanlara ait özel isimlerin hal eklerini ve iyelik ekini üreten bir JavaScript kütüphanesidir. <a href="http://sercaneraslan.com/haller.js/">http://sercaneraslan.com/haller.js/</a>
 
-| Durum                            | Hal/Ek | Örnek      |
+### Ekler
+
+| Durum                            | Ekler  | Örnek      |
 |----------------------------------|--------|------------|
 | Yönelme Hali                     | -e     | Sercan'a   |
 | Belirtme Hali                    | -i     | Sercan'ı   |
