@@ -1,4 +1,4 @@
-# Haller.js
+# Haller.js
 
 Sadece insanlara ait özel isimlerin hal eklerini ve iyelik ekini üreten bir JavaScript kütüphanesidir. Detaylar için: <a href="http://sercaneraslan.com/haller.js/">haller.js</a>
 
